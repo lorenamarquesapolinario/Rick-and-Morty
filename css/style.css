@@ -53,6 +53,7 @@ main{
 .image{
     width: 200px;
     border-right: 2px solid #dcdcdc;
+    border-radius: 8px 0 0 8px;
 }
 .card{
     border: 1px solid black;
