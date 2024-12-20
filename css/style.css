@@ -13,6 +13,7 @@ header {
     background-color: limegreen;
     padding: 5px 20px 20px 20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 h1{
     margin: 10px;
@@ -40,11 +41,17 @@ nav {
     border: 1px solid black;
     box-shadow: 1px 1px 2px black;
     border-radius: 0px 8px 8px 0;
+    color: black;
 }
 #search:hover{
     cursor: pointer;
+    color: rgb(114, 114, 114);
 }
-
+#descricao{
+    margin-top: 10px;
+    font-size: large;
+    font-weight: 900px;
+}
 
 
 main{
@@ -54,6 +61,7 @@ main{
 }
 .image, .article-image{
     width: 200px;
+    min-width: 150px;
     border-right: 2px solid #dcdcdc;
     border-radius: 8px 0 0 8px;
 }
@@ -63,6 +71,7 @@ main{
     padding: 4px;
     display: flex;
     width: 400px;
+    min-width: 300px;
     border-radius: 12px;
     background-color: rgb(10, 10, 50);
     box-shadow: 3px 3px 2px black;
@@ -74,7 +83,6 @@ main{
     color: rgb(114, 154, 35);
     font-weight: 500;
     font-size: large;
-    line-height: 34px;
 }
 span{
     color: #c1c1c1;
@@ -83,6 +91,11 @@ span{
 
 .card:hover{
     transform: scale(1.1);cursor: pointer;
+}
+#numero-ep{
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
 }
 
 
@@ -94,7 +107,7 @@ article{
 }
 .article-card{
     width: 700px;
-    min-width: 400px;
+    min-width: 300px;
     border-radius: 0 12px 12px 0;
 }
 .article-image{
@@ -114,4 +127,13 @@ article{
 }
 #close span{
     font-size: xx-large;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: rgb(34, 135, 34);
+    margin-top: 20px;
 }

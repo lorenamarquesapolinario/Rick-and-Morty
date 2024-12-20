@@ -1,15 +1,16 @@
 
 
 const URL1 = "https://rickandmortyapi.com/api/character/";
+const URL2 = "https://rickandmortyapi.com/api/episode/";
 
 function retunNumRandom() {
     return (Math.random() * 19 + 1).toFixed();
 }
 
-function notNull(valor) { return valor ? valor : "Null" }
+function notNull(valor) { return valor ? valor : "Unknown" }
 
 function clearMain() { $("main").empty(); }
-function clearArticle(){ $("article").empty()}
+function clearArticle() { $("article").empty() }
 
 
 
@@ -22,8 +23,14 @@ async function load() {
     await fetch(search)
         .then((response) => response.json())
         .then((data) => {
-            // console.log(data)
-            criarCards(data);
+            clearMain();
+
+            const TAMANHO = data["results"].length;
+            data = data["results"];
+
+            for (let i = 0; i < TAMANHO; i++) {
+                criarCards(data[i]);
+            }
         })
         .catch((erro) => {
             console.log("Erro: " + erro);
@@ -36,20 +43,19 @@ async function load() {
 function criarCards(data) {
 
     let main = document.querySelector("main");
-    clearMain();
 
-    for (let i = 0; i < data["results"].length; i++) {
-        let id = data["results"][i]["id"];
-        let image = data["results"][i]["image"];
-        let name = data["results"][i]["name"];
-        let status = data["results"][i]["status"];
-        let species = data["results"][i]["species"];
-        let gender = data["results"][i]["gender"];
-        let location = data["results"][i]["location"]["name"];
 
-        let content = "";
+    let id = data["id"];
+    let image = data["image"];
+    let name = data["name"];
+    let status = data["status"];
+    let species = data["species"];
+    let gender = data["gender"];
+    let location = data["location"]["name"];
 
-        content += `<section onclick="searchId(${id})" class="card" id="${id}">
+    let content = "";
+
+    content += `<section onclick="searchId(${id})" class="card" id="${id}">
                         <img src="${image}" alt="" class="image">
                         <div class="description">
                             <p>ID: <span>${id}</span></p>
@@ -61,10 +67,10 @@ function criarCards(data) {
                         </div>
                     </section>`;
 
-        // console.log(main);
-        main.innerHTML += content;
+    main.innerHTML += content;
 
-    }
+    return;
+
 }
 
 
@@ -77,6 +83,7 @@ async function construirCard(obj) {
     let id = obj["id"];
     let image = obj["image"];
     let name = obj["name"];
+    let status = obj["status"];
     let species = obj["species"];
     let gender = obj["gender"];
     let location = obj["location"]["name"];
@@ -93,8 +100,8 @@ async function construirCard(obj) {
                     <img src="${image}" alt="" class="article-image">
                     <div class="article-description">
                         <p>ID: <span>${id}</span></p>
-                        <p>Name: <span>${notNull(id)}</span></p>
-                        <p>Status: <span>${notNull(name)}</span></p>
+                        <p>Name: <span>${notNull(name)}</span></p>
+                        <p>Status: <span>${notNull(status)}</span></p>
                         <p>Species: <span>${notNull(species)}</span></p>
                         <p>Gender: <span>${notNull(gender)}</span></p>
                         <p>Location: <span>${notNull(location)}</span></p>
@@ -104,7 +111,7 @@ async function construirCard(obj) {
                 </div>`;
 
     article.innerHTML = content;
-    
+
     window.scrollTo(0, -1000);
 }
 
@@ -129,3 +136,78 @@ async function searchId(id) {
 
 
 
+$(document).keypress(function (e) {
+    if (e.which === 13) { getName() }
+})
+
+
+let searchBtn = document.getElementById("search");
+searchBtn.addEventListener("click", getName);
+
+function getName() {
+    let name = document.getElementById("busca").value;
+    name = name.toLowerCase();
+    document.getElementById("busca").value = "";
+
+    searchName(name);    
+    searchEpisode(name);
+}
+
+
+async function searchName(name) {
+
+    let search = URL1 + "?name=" + name;
+
+    await fetch(search)
+        .then((response) => response.json())
+        .then((data) => {
+            let id = data["results"][0]["id"];
+            searchId(id);
+        })
+        .catch((erro) => {
+            console.log("Erro: " + erro);
+        })
+}
+
+
+async function searchEpisode(name) {
+    
+    let search = URL2 + "?name=" + name;
+
+    await fetch(search)
+    .then((response) => response.json())
+    .then((data) => {
+        
+        const TAMANHO = data["results"][0]["characters"].length;
+        let ep = data["results"][0]["name"];
+
+        for(let i=0; i<TAMANHO; i++){
+            let personagem = data["results"][0]["characters"][i];
+            searchPersona(personagem, ep)
+        }
+    })
+    .catch((erro) => {
+        console.log("Erro: " + erro);
+    })
+}
+
+
+
+async function searchPersona(persona, nameEp) {
+    clearMain();
+    clearArticle();
+
+    document.querySelector("main").innerHTML = `<h2 id="numero-ep">Episode: ${nameEp}</h2>`;
+
+    await fetch(persona)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data)
+        criarCards(data)
+        return;
+    })
+    .catch((erro) => {
+        console.log("Erro: " + erro);
+    })
+    
+}
