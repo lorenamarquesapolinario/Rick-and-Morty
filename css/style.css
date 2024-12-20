@@ -67,7 +67,7 @@ main{
 }
 .card, .article-card{
     border: 1px solid black;
-    margin: 10px 10px 10px 0;
+    margin: 10px;
     padding: 4px;
     display: flex;
     width: 400px;
@@ -136,4 +136,10 @@ footer{
     height: 80px;
     background-color: rgb(34, 135, 34);
     margin-top: 20px;
+}
+
+@media screen and (max-width: 400px) {
+    .article-card{
+        display: block;
+    }
 }
