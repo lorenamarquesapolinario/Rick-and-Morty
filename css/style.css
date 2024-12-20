@@ -142,4 +142,7 @@ footer{
     .article-card{
         display: block;
     }
+    .card:hover{
+        transform: scale(0);
+    }
 }
