@@ -5,6 +5,8 @@
     box-sizing: border-box;  
     font-family: "Roboto", serif;
     color: black;
+    transition: .5s;
+    transition: all .25s linear;
 }
 
 header {
@@ -50,14 +52,14 @@ main{
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.image{
+.image, .article-image{
     width: 200px;
     border-right: 2px solid #dcdcdc;
     border-radius: 8px 0 0 8px;
 }
-.card{
+.card, .article-card{
     border: 1px solid black;
-    margin: 10px;
+    margin: 10px 10px 10px 0;
     padding: 4px;
     display: flex;
     width: 400px;
@@ -65,9 +67,51 @@ main{
     background-color: rgb(10, 10, 50);
     box-shadow: 3px 3px 2px black;
 }
-.description{
+.description, .article-description{
     padding: 10px;
 }
-.description p{
+.description p, .article-description p{
     color: rgb(114, 154, 35);
+    font-weight: 500;
+    font-size: large;
+    line-height: 34px;
+}
+span{
+    color: #c1c1c1;
+    font-weight: 300;
+}
+
+.card:hover{
+    transform: scale(1.1);cursor: pointer;
+}
+
+
+
+article{
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+.article-card{
+    width: 700px;
+    min-width: 400px;
+    border-radius: 0 12px 12px 0;
+}
+.article-image{
+    width: 400px;
+    min-width: 200px;
+}
+.article-description{
+    font-size: larger;
+}
+#close{
+   background-color: red;
+   width: 60px;
+   padding: 4px;
+   margin: 10px 0 10px 10px;
+   border-radius: 12px 0 0 12px;
+   box-shadow: 3px 3px 2px black;
+}
+#close span{
+    font-size: xx-large;
 }
