@@ -150,7 +150,6 @@ function getName() {
     document.getElementById("busca").value = "";
 
     searchName(name);    
-    searchEpisode(name);
 }
 
 
@@ -169,45 +168,3 @@ async function searchName(name) {
         })
 }
 
-
-async function searchEpisode(name) {
-    
-    let search = URL2 + "?name=" + name;
-
-    await fetch(search)
-    .then((response) => response.json())
-    .then((data) => {
-        
-        const TAMANHO = data["results"][0]["characters"].length;
-        let ep = data["results"][0]["name"];
-
-        for(let i=0; i<TAMANHO; i++){
-            let personagem = data["results"][0]["characters"][i];
-            searchPersona(personagem, ep)
-        }
-    })
-    .catch((erro) => {
-        console.log("Erro: " + erro);
-    })
-}
-
-
-
-async function searchPersona(persona, nameEp) {
-    clearMain();
-    clearArticle();
-
-    document.querySelector("main").innerHTML = `<h2 id="numero-ep">Episode: ${nameEp}</h2>`;
-
-    await fetch(persona)
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data)
-        criarCards(data)
-        return;
-    })
-    .catch((erro) => {
-        console.log("Erro: " + erro);
-    })
-    
-}

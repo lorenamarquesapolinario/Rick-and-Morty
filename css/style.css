@@ -60,8 +60,7 @@ main{
     justify-content: space-around;
 }
 .image, .article-image{
-    width: 200px;
-    min-width: 150px;
+    width: 180px;
     border-right: 2px solid #dcdcdc;
     border-radius: 8px 0 0 8px;
 }
@@ -111,8 +110,7 @@ article{
     border-radius: 0 12px 12px 0;
 }
 .article-image{
-    width: 400px;
-    min-width: 200px;
+    width: 300px;
 }
 .article-description{
     font-size: larger;
@@ -121,12 +119,13 @@ article{
    background-color: red;
    width: 60px;
    padding: 4px;
-   margin: 10px 0 10px 10px;
+   margin: 10px -14px 10px 10px;
    border-radius: 12px 0 0 12px;
    box-shadow: 3px 3px 2px black;
 }
 #close span{
     font-size: xx-large;
+    cursor: pointer;
 }
 
 footer{
@@ -139,10 +138,7 @@ footer{
 }
 
 @media screen and (max-width: 400px) {
-    .article-card{
-        display: block;
-    }
     .card:hover{
-        transform: scale(0);
+        transform: scale(0.1);
     }
 }
