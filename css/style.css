@@ -139,6 +139,12 @@ footer{
 
 @media screen and (max-width: 400px) {
     .card:hover{
-        transform: scale(0.1);
+        transform: scale(1);
+    }
+    .article-image{
+        width: 120px;
+    }
+    .article-description p{
+        font-size: small;
     }
 }
